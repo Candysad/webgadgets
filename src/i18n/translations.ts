@@ -30,7 +30,7 @@ export const translations = {
     projects: {
       numberSequenceGrid: {
         title: '舒尔特表',
-        description: '在随机数字方格中按 1 到 n 的顺序快速点击，完成后查看用时。',
+        description: '快速点击从 1 到 n 的数字',
         ariaGame: '顺序点击数字游戏',
         boardLabel: '{size} 乘 {size} 数字方框',
         emptyBoard: '点击开始后生成 {size} x {size} 数字方格',
@@ -47,7 +47,7 @@ export const translations = {
       },
       colorDifference: {
         title: '色差识别检测',
-        description: '在 16 个相近色块中找出唯一不同的颜色，1 分钟内挑战更高难度。',
+        description: '找出唯一不同的颜色',
         ariaGame: '色差识别检测游戏',
         boardLabel: '色差识别方框',
         emptyBoard: '点击开始后生成 16 个颜色方格',
@@ -65,7 +65,7 @@ export const translations = {
       },
       reactionTime: {
         title: '反应时间测试',
-        description: '测量你的毫秒级反应速度。',
+        description: '测测你的毫秒级反应速度',
         ariaGame: '反应时间测试游戏',
         idlePrompt: ['点击画面后开始等待', '变色后点击画面'],
         waitingPrompt: '等待画面变色',
@@ -84,7 +84,7 @@ export const translations = {
         listTitle: '候选项',
         countLabel: '{count} 项',
         removeLabel: '删除 {item}',
-        emptyText: '先添加一些想吃的东西。',
+        emptyText: '先添加一些想吃的东西',
         resultPrefix: '今晚吃：{item}',
         defaultItems: [
           '火锅/麻辣烫/麻辣香锅',
@@ -110,7 +110,7 @@ export const translations = {
   },
   en: {
     common: {
-      appName: 'Web Gadgets',
+      appName: 'AI Gadgets',
       home: 'Home',
       backHome: 'Back home',
       languageToggle: 'Switch language',
@@ -132,7 +132,7 @@ export const translations = {
     projects: {
       numberSequenceGrid: {
         title: 'Schulte Grid',
-        description: 'Click randomized numbers from 1 to n in order as quickly as possible, then check your time.',
+        description: 'Click randomized numbers from 1 to n in order as quickly as possible',
         ariaGame: 'Sequential number grid game',
         boardLabel: '{size} by {size} number grid',
         emptyBoard: 'Press start to generate a {size} x {size} number grid',
@@ -149,7 +149,7 @@ export const translations = {
       },
       colorDifference: {
         title: 'Color Difference Test',
-        description: 'Find the only different color among 16 similar tiles and climb the difficulty ladder in one minute.',
+        description: 'Find the only different color',
         ariaGame: 'Color difference test game',
         boardLabel: 'Color difference board',
         emptyBoard: 'Press start to generate 16 color tiles',
@@ -167,7 +167,7 @@ export const translations = {
       },
       reactionTime: {
         title: 'Reaction Time Test',
-        description: 'Wait for the color change, then click immediately to measure your reaction in milliseconds.',
+        description: 'measure your reaction in milliseconds',
         ariaGame: 'Reaction time test game',
         idlePrompt: ['Click to start', 'click again when color changes'],
         waitingPrompt: 'Wait for the color changes',
@@ -176,7 +176,7 @@ export const translations = {
       },
       eatTonight: {
         title: 'What to Eat Tonight',
-        description: 'May his will choose for you.',
+        description: 'May his will choose for you',
         ariaGame: 'What to eat tonight',
         kicker: 'Dinner Picker',
         inputLabel: 'Enter a dinner candidate',
