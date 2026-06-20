@@ -23,7 +23,6 @@ export function Home() {
       <section className={styles.grid} aria-label={t.home.projectList}>
         {projects.map((project) => {
           const Icon = categoryIcons[project.category];
-          const isDraft = project.status === 'draft';
           const projectText = t.projects[project.translationKey];
 
           return (
@@ -33,15 +32,12 @@ export function Home() {
                   <Icon aria-hidden="true" size={16} />
                   {t.home.category[project.category]}
                 </span>
-                <span className={isDraft ? styles.draft : styles.ready}>
-                  {t.home.status[project.status]}
-                </span>
               </div>
 
               <h2>{projectText.title}</h2>
               <p>{projectText.description}</p>
 
-              <Link className={styles.link} to={project.path} aria-disabled={isDraft}>
+              <Link className={styles.link} to={project.path}>
                 {t.home.open}
                 <ArrowUpRight aria-hidden="true" size={16} />
               </Link>
