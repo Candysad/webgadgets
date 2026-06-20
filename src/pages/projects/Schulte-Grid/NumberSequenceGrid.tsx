@@ -187,7 +187,7 @@ export function NumberSequenceGrid() {
     resetGameState();
   }, [resetGameState]);
 
-  // 给指定方格添加 0.2 秒的正确或错误颜色反馈，时间结束后恢复默认颜色。
+  // 给指定方格添加 0.1 秒的正确或错误颜色反馈，时间结束后恢复默认颜色。
   const flashTile = useCallback((tileId: number, feedback: Exclude<TileFeedback, null>) => {
     setTiles((currentTiles) =>
       currentTiles.map((tile) => (tile.id === tileId ? { ...tile, feedback } : tile)),

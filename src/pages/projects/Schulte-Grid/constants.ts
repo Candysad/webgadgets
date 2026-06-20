@@ -4,7 +4,7 @@ export const GRID_SIZE_LIMITS = {
 } as const;
 
 export const GAME_TIMING = {
-  feedbackMs: 200,
+  feedbackMs: 100,
   timerTickMs: 50,
 } as const;
 
