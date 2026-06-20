@@ -65,7 +65,7 @@ export const translations = {
       },
       reactionTime: {
         title: '反应时间测试',
-        description: '等待画面随机变色后立刻点击，测量你的毫秒级反应速度。',
+        description: '测量你的毫秒级反应速度。',
         ariaGame: '反应时间测试游戏',
         idlePrompt: ['点击画面后开始等待', '变色后点击画面'],
         waitingPrompt: '等待画面变色',
@@ -93,6 +93,14 @@ export const translations = {
           '小笼包/锅贴/蒸饺/馄饨/云吞/抄手/水饺',
           '酸辣汤/胡辣汤/疙瘩汤/牛肉羹',
         ],
+      },
+      magicConch: {
+        title: '魔法海螺',
+        description: '点击海螺，让它用声音回答你的问题。',
+        ariaGame: '魔法海螺随机回答游戏',
+        kicker: 'Magic Conch',
+        askButton: '问问神奇的魔法海螺',
+        imageAlt: '魔法海螺',
       },
     },
     notFound: {
@@ -186,6 +194,14 @@ export const translations = {
           'Steak/Lamb Chops/Pork Ribs/Chicken Breast/T-Bone/Wellington',
           'Margherita/Pepperoni//Focaccia',
         ],
+      },
+      magicConch: {
+        title: 'Magic Conch',
+        description: 'Click the conch and let it answer your question aloud.',
+        ariaGame: 'Magic Conch random answer game',
+        kicker: 'Magic Conch',
+        askButton: 'Ask the Magic Conch',
+        imageAlt: 'Magic Conch',
       },
     },
     notFound: {

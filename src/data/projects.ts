@@ -1,6 +1,6 @@
 export interface ProjectItem {
   id: string;
-  translationKey: 'numberSequenceGrid' | 'colorDifference' | 'reactionTime' | 'eatTonight';
+  translationKey: 'numberSequenceGrid' | 'colorDifference' | 'reactionTime' | 'eatTonight' | 'magicConch';
   path: string;
   category: 'game' | 'tool';
   status: 'draft' | 'ready';
@@ -33,6 +33,13 @@ export const projects: ProjectItem[] = [
     translationKey: 'eatTonight',
     path: '/Eat-Tonight',
     category: 'tool',
+    status: 'ready',
+  },
+  {
+    id: 'Magic-Conch',
+    translationKey: 'magicConch',
+    path: '/Magic-Conch',
+    category: 'game',
     status: 'ready',
   },
 ];

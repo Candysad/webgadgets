@@ -5,6 +5,7 @@ import { Home } from '../pages/Home/Home';
 import { NotFound } from '../pages/NotFound/NotFound';
 import { ColorDifference } from '../pages/projects/Color-Difference';
 import { EatTonight } from '../pages/projects/Eat-Tonight';
+import { MagicConch } from '../pages/projects/Magic-Conch';
 import { ReactionTime } from '../pages/projects/Reaction-Time';
 import { NumberSequenceGrid } from '../pages/projects/Schulte-Grid';
 
@@ -19,6 +20,7 @@ export function App() {
           <Route path="/Color-Difference" element={<ColorDifference />} />
           <Route path="/Reaction-Time" element={<ReactionTime />} />
           <Route path="/Eat-Tonight" element={<EatTonight />} />
+          <Route path="/Magic-Conch" element={<MagicConch />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>

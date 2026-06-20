@@ -1,0 +1,139 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 88px var(--space-6) var(--space-6);
+  background:
+    radial-gradient(circle at 50% 18%, rgb(125 211 252 / 18%), transparent 28%),
+    linear-gradient(180deg, #06111f 0%, #05172a 48%, #03101f 100%);
+}
+
+.shell {
+  display: grid;
+  width: min(720px, 100%);
+  justify-items: center;
+  gap: var(--space-6);
+}
+
+.header {
+  max-width: 620px;
+  text-align: center;
+}
+
+.kicker {
+  margin: 0 0 var(--space-2);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.header p:last-child {
+  margin: var(--space-4) 0 0;
+  color: var(--color-muted);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.conchFrame {
+  display: grid;
+  width: min(520px, 100%);
+  aspect-ratio: 1;
+  place-items: center;
+  padding: var(--space-6);
+  border: 1px solid rgb(125 211 252 / 28%);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle, rgb(14 165 233 / 16%), transparent 62%),
+    rgb(15 23 42 / 78%);
+  box-shadow: var(--shadow-md);
+}
+
+.conchButton {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.conchButton:hover .conchImage,
+.conchButton:focus-visible .conchImage {
+  transform: translateY(-3px) scale(1.02);
+  filter: drop-shadow(0 24px 36px rgb(56 189 248 / 22%));
+}
+
+.conchButtonActive .conchImage {
+  animation: conch-pulse 760ms ease-in-out infinite;
+}
+
+.conchImage {
+  display: block;
+  max-width: 92%;
+  max-height: 92%;
+  object-fit: contain;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.askButton {
+  min-height: 52px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: #03111a;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 0 var(--space-6);
+}
+
+.askButton:hover:not(:disabled),
+.askButton:focus-visible:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.askButton:disabled {
+  cursor: wait;
+  opacity: 0.66;
+}
+
+@keyframes conch-pulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-6px) scale(1.03);
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 76px var(--space-4) var(--space-5);
+  }
+
+  .header h1 {
+    font-size: 2.6rem;
+  }
+
+  .conchFrame {
+    padding: var(--space-4);
+  }
+
+  .askButton {
+    width: 100%;
+  }
+}
