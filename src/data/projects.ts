@@ -9,11 +9,11 @@ export interface ProjectItem {
 
 export const projects: ProjectItem[] = [
   {
-    id: 'starter-board',
-    title: '项目准备区',
-    description: '用于占位的第一个入口，后续可以替换为真实小游戏或小工具。',
-    path: '/',
-    category: 'tool',
-    status: 'draft',
+    id: 'number-sequence-grid',
+    title: '顺序点击数字方格',
+    description: '在随机数字方格中按 1 到 n 的顺序快速点击，完成后查看用时。',
+    path: '/projects/number-sequence-grid',
+    category: 'game',
+    status: 'ready',
   },
 ];

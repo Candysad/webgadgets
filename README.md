@@ -1,234 +1,51 @@
-# Game Web
+# Web Gadgets
 
-一个用于收纳多个静态单页面小游戏和小工具的 React + TypeScript 网站。主页负责展示项目列表，每个子项目作为独立页面运行，并保持统一的视觉主题、交互规范和部署方式。
+Web Gadgets 是一个用于收纳多个静态单页面小游戏和小工具的 React + TypeScript 网站。
+
+主页负责展示项目列表，点击后进入对应的小项目。每个小项目都是静态网页页面，可独立开发、独立访问，并共享全站统一的主题风格。
 
 ## 项目目标
 
 - 使用 React + TypeScript 构建静态网站。
-- 主页提供所有小游戏、小工具的入口列表。
-- 每个小项目都是单页面静态页面，可独立访问、刷新和分享。
-- 全站共享统一主题，包括颜色、字体、间距、按钮、卡片、表单和状态样式。
+- 使用 Vite 作为构建工具。
+- 主页提供小游戏、小工具的统一入口列表。
+- 每个小项目保持单页面、静态化、可部署的形态。
+- 全站共享统一的颜色、字体、间距、组件和交互规范。
 - 支持部署到 GitHub Pages。
 
-## 技术栈约定
+## 本地开发
 
-- 构建工具：Vite。
-- 前端框架：React。
-- 开发语言：TypeScript。
-- 样式方案：CSS Modules 或普通 CSS，优先使用全局主题变量统一颜色和尺寸。
-- 路由方案：React Router，路由路径需要兼容 GitHub Pages 的子路径部署。
-- 图标方案：优先使用 `lucide-react`。
+项目使用 Volta 管理 Node 和 npm 版本。进入项目目录后，Volta 会根据 `package.json` 中的配置自动切换版本。
 
-## 推荐目录结构
+安装依赖：
 
-```text
-.
-├── public/
-│   └── assets/                # 静态资源，适合放置不会被构建处理的文件
-├── src/
-│   ├── app/                   # 应用入口、路由、全局布局
-│   ├── components/            # 全站通用组件
-│   ├── data/                  # 项目清单、导航配置等静态数据
-│   ├── pages/
-│   │   ├── Home/              # 主页项目列表
-│   │   └── projects/          # 每个小游戏或小工具一个目录
-│   ├── styles/                # 全局样式、主题变量、重置样式
-│   ├── types/                 # 共享类型定义
-│   └── utils/                 # 通用工具函数
-├── index.html
-├── package.json
-├── tsconfig.json
-└── vite.config.ts
+```bash
+npm install
 ```
 
-## 小项目目录规范
+启动开发服务器：
 
-每个小游戏或小工具放在 `src/pages/projects/<project-name>/` 下，目录名使用小写短横线命名。
-
-推荐结构：
-
-```text
-src/pages/projects/click-counter/
-├── index.tsx                  # 页面入口组件
-├── style.module.css           # 页面局部样式
-├── config.ts                  # 项目元信息，可选
-└── logic.ts                   # 独立业务逻辑，可选
+```bash
+npm run dev
 ```
 
-约定：
-
-- 页面组件默认导出 React 组件。
-- 小项目内部状态优先封装在当前目录，不向全局泄漏。
-- 如果项目需要被主页展示，应在统一项目清单中登记名称、路径、描述、分类和状态。
-- 小项目可以有自己的局部样式，但颜色、圆角、阴影、字体、间距优先使用全局 CSS 变量。
-
-## 项目清单规范
-
-主页列表数据建议集中维护在 `src/data/projects.ts`。
-
-推荐字段：
-
-```ts
-export interface ProjectItem {
-  id: string;
-  title: string;
-  description: string;
-  path: string;
-  category: 'game' | 'tool';
-  status: 'draft' | 'ready';
-}
-```
-
-要求：
-
-- `id` 使用小写短横线命名，例如 `click-counter`。
-- `path` 与路由保持一致，例如 `/projects/click-counter`。
-- `title` 用于主页展示，应简短清楚。
-- `description` 说明核心玩法或用途，不写营销式长文案。
-- 未完成项目标记为 `draft`，主页可以展示禁用态或开发中状态。
-
-## 路由规范
-
-- 主页路径：`/`。
-- 小项目路径：`/projects/<project-name>`。
-- 路由配置集中放在 `src/app/router.tsx` 或同等位置。
-- 新增小项目时，需要同步更新路由配置和项目清单。
-- 部署到 GitHub Pages 时，需要在 Vite 中设置正确的 `base`。
-
-GitHub Pages 仓库页部署通常使用：
-
-```ts
-export default defineConfig({
-  base: '/gameweb/',
-});
-```
-
-如果部署到用户或组织主页，例如 `<user>.github.io` 根路径，则使用：
-
-```ts
-export default defineConfig({
-  base: '/',
-});
-```
-
-## 主题与样式规范
-
-全站主题变量统一放在 `src/styles/theme.css`，并在应用入口引入。
-
-推荐变量：
-
-```css
-:root {
-  --color-bg: #f7f7f2;
-  --color-surface: #ffffff;
-  --color-text: #1f2933;
-  --color-muted: #687385;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-border: #d9dee7;
-  --color-danger: #dc2626;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --shadow-sm: 0 1px 2px rgb(15 23 42 / 8%);
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-}
-```
-
-样式要求：
-
-- 页面背景、文本、边框、按钮、卡片统一使用 CSS 变量。
-- 卡片圆角不超过 `8px`，除非后续设计系统另有规定。
-- 避免整站只使用单一色系；主色之外需要保留中性色和必要状态色。
-- 按钮、输入框、列表项需要有 hover、focus、disabled 状态。
-- 移动端优先保证文字不溢出、不重叠、不遮挡交互元素。
-- 不在页面中写大段介绍如何使用界面，交互应通过布局和控件本身表达清楚。
-
-## 组件规范
-
-通用组件放在 `src/components/`，只沉淀跨两个及以上页面复用的能力。
-
-推荐组件：
-
-- `AppLayout`：全站基础布局。
-- `ProjectCard`：主页项目入口卡片。
-- `IconButton`：只展示图标的按钮，需要提供 `aria-label`。
-- `EmptyState`：空列表状态。
-- `PageHeader`：页面标题区域。
-
-组件要求：
-
-- Props 使用 TypeScript interface 定义。
-- 新增函数或方法前添加简洁注释，说明职责或使用场景。
-- 不为一次性页面逻辑过早抽象组件。
-- 可交互组件需要考虑键盘访问和无障碍标签。
-
-## TypeScript 规范
-
-- 开启严格类型检查，避免使用 `any`。
-- 数据结构优先定义明确 interface 或 type。
-- 组件 props、项目配置、路由元信息需要有类型约束。
-- 工具函数放在 `src/utils/`，命名表达清楚用途。
-- 复杂逻辑优先拆到纯函数，方便后续测试。
-
-## 静态资源规范
-
-- 会被组件 import 的图片、音频等资源放在 `src/assets/`。
-- 不需要构建处理、直接通过 URL 访问的资源放在 `public/assets/`。
-- 资源文件名使用小写短横线命名。
-- 大型资源需要谨慎引入，避免影响 GitHub Pages 加载速度。
-
-## GitHub Pages 部署规范
-
-推荐使用 GitHub Actions 自动部署。
-
-基本流程：
-
-1. 安装依赖。
-2. 执行类型检查和构建。
-3. 将 `dist/` 发布到 GitHub Pages。
-
-构建命令建议：
+生产构建：
 
 ```bash
 npm run build
 ```
 
-部署前检查：
+预览构建产物：
 
-- `vite.config.ts` 中的 `base` 与仓库部署路径一致。
-- 页面刷新时路由可正常工作。
-- 静态资源路径没有写死为本地绝对路径。
-- 主页项目入口都能跳转到正确页面。
+```bash
+npm run preview
+```
 
-## 开发流程
+## 文档
 
-新增一个小项目时，按以下步骤进行：
+- [开发约定与规范](docs/development.md)
+- [GitHub Pages 部署说明](docs/github-pages.md)
 
-1. 在 `src/pages/projects/` 下创建项目目录。
-2. 编写页面组件和局部样式。
-3. 在项目清单中登记元信息。
-4. 在路由配置中添加页面路径。
-5. 在本地启动网站，验证主页入口和直接访问页面都正常。
-6. 执行类型检查和构建。
+## 当前状态
 
-## 命名规范
-
-- 文件夹：小写短横线，例如 `memory-card`。
-- React 组件文件：大驼峰，例如 `ProjectCard.tsx`。
-- 普通工具文件：小写短横线或小驼峰，保持目录内一致。
-- CSS Module：`*.module.css`。
-- 类型名：大驼峰，例如 `ProjectItem`。
-- 常量：语义清楚，必要时使用全大写，例如 `PROJECT_STATUS_LABELS`。
-
-## 后续待办
-
-- 初始化 Vite + React + TypeScript 项目。
-- 建立全局主题样式和基础布局。
-- 实现主页项目列表。
-- 接入第一个示例小游戏或小工具。
-- 添加 GitHub Pages 部署配置。
+项目已完成基础初始化，包含 React + TypeScript + Vite 骨架、主页项目列表、统一主题样式和 GitHub Pages 部署工作流。

@@ -1,0 +1,230 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: var(--space-6);
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 460px) minmax(220px, 260px);
+  align-items: center;
+  gap: var(--space-8);
+  width: min(860px, 100%);
+}
+
+.playArea {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+}
+
+.resultPanel {
+  display: grid;
+  min-height: 56px;
+  gap: var(--space-1);
+  text-align: center;
+}
+
+.result {
+  margin: 0;
+  color: var(--game-result-text);
+  font-size: var(--game-font-result);
+  font-weight: 800;
+}
+
+.averageResult,
+.timerAverage {
+  margin: 0;
+  color: var(--game-average-text);
+  font-size: var(--game-font-average);
+  font-weight: 800;
+}
+
+.board {
+  display: grid;
+  width: min(72vw, 460px);
+  aspect-ratio: 1;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--game-board-border);
+  border-radius: var(--radius-md);
+  background: var(--game-board-background);
+  box-shadow: var(--shadow-md);
+}
+
+.emptyBoard {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  place-items: center;
+  color: var(--game-muted-text);
+  font-size: var(--game-font-control-label);
+  text-align: center;
+}
+
+.tile {
+  display: grid;
+  min-width: 0;
+  min-height: 0;
+  place-items: center;
+  border: 1px solid var(--game-tile-border);
+  border-radius: var(--radius-sm);
+  background: var(--game-tile-background);
+  color: var(--game-tile-text);
+  cursor: pointer;
+  font-size: var(--game-font-tile);
+  font-weight: 800;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    transform 120ms ease;
+}
+
+.tile:hover:not(:disabled),
+.tile:focus-visible:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: var(--color-primary);
+}
+
+.tile:disabled {
+  cursor: default;
+  opacity: 0.78;
+}
+
+.correct {
+  background: var(--game-correct-feedback);
+  border-color: var(--game-correct-feedback);
+  color: var(--game-correct-feedback-text);
+}
+
+.wrong {
+  background: var(--game-wrong-feedback);
+  border-color: var(--game-wrong-feedback);
+  color: var(--game-wrong-feedback-text);
+}
+
+.controls {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--game-control-border);
+  border-radius: var(--radius-md);
+  background: var(--game-control-background);
+  box-shadow: var(--shadow-sm);
+}
+
+.controlGroup {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.controlLabel {
+  color: var(--game-muted-text);
+  font-size: var(--game-font-control-label);
+  font-weight: 700;
+}
+
+.sizePicker {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.gridValue {
+  display: grid;
+  min-height: 44px;
+  place-items: center;
+  border: 1px solid var(--game-control-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: var(--game-font-grid-value);
+  font-weight: 900;
+}
+
+.iconButton,
+.actionButton {
+  display: inline-grid;
+  min-height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--game-font-button);
+  font-weight: 800;
+}
+
+.iconButton {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+}
+
+.iconButton:hover:not(:disabled),
+.iconButton:focus-visible:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.actionButton {
+  width: 100%;
+  padding: 0 var(--space-4);
+  color: var(--game-action-button-text);
+}
+
+.primaryAction {
+  background: var(--game-primary-button);
+}
+
+.primaryAction:hover:not(:disabled),
+.primaryAction:focus-visible:not(:disabled) {
+  background: var(--game-primary-button-hover);
+}
+
+.dangerAction {
+  background: var(--game-danger-button);
+}
+
+.dangerAction:hover:not(:disabled),
+.dangerAction:focus-visible:not(:disabled) {
+  background: var(--game-danger-button-hover);
+}
+
+.iconButton:disabled,
+.actionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.timer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  color: var(--color-text);
+  font-size: var(--game-font-timer);
+  font-weight: 800;
+}
+
+.timer span:first-child {
+  color: var(--game-muted-text);
+  font-size: var(--game-font-control-label);
+}
+
+.timerAverage {
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    order: -1;
+  }
+
+  .board {
+    width: min(88vw, 460px);
+  }
+}

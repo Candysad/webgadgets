@@ -7,21 +7,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --color-bg: #f7f7f2;
-  --color-surface: #ffffff;
-  --color-text: #1f2933;
-  --color-muted: #687385;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-primary-soft: #dbeafe;
-  --color-border: #d9dee7;
-  --color-warning-bg: #fef3c7;
-  --color-warning-text: #92400e;
-  --color-success-bg: #dcfce7;
-  --color-success-text: #166534;
+  --color-bg: #050816;
+  --color-surface: #0f172a;
+  --color-surface-raised: #1e293b;
+  --color-surface-hover: #273449;
+  --color-text: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-primary: #38bdf8;
+  --color-primary-hover: #7dd3fc;
+  --color-primary-soft: #082f49;
+  --color-border: #243247;
+  --color-warning-bg: #431407;
+  --color-warning-text: #fdba74;
+  --color-success-bg: #052e16;
+  --color-success-text: #86efac;
   --radius-sm: 4px;
   --radius-md: 8px;
-  --shadow-sm: 0 1px 2px rgb(15 23 42 / 8%);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 38%);
+  --shadow-md: 0 24px 80px rgb(0 0 0 / 38%);
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -39,6 +42,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
+  background:
+    radial-gradient(circle at 15% 15%, rgb(56 189 248 / 14%), transparent 28%),
+    linear-gradient(135deg, #050816 0%, #080b1a 48%, #0b1020 100%);
 }
 
 button,
