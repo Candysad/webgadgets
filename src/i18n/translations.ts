@@ -96,8 +96,8 @@ export const translations = {
       },
       magicConch: {
         title: '魔法海螺',
-        description: '点击海螺，让它用声音回答你的问题。',
-        ariaGame: '魔法海螺随机回答游戏',
+        description: '为什么不问问神奇的魔法海螺呢',
+        ariaGame: '为什么不问问神奇的魔法海螺呢',
         kicker: 'Magic Conch',
         askButton: '问问神奇的魔法海螺',
         imageAlt: '魔法海螺',
@@ -197,8 +197,8 @@ export const translations = {
       },
       magicConch: {
         title: 'Magic Conch',
-        description: 'Click the conch and let it answer your question aloud.',
-        ariaGame: 'Magic Conch random answer game',
+        description: 'Why not ask the Magic Conch?',
+        ariaGame: 'Why not ask the Magic Conch?',
         kicker: 'Magic Conch',
         askButton: 'Ask the Magic Conch',
         imageAlt: 'Magic Conch',
