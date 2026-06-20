@@ -110,7 +110,7 @@ export const translations = {
   },
   en: {
     common: {
-      appName: 'AI Gadgets',
+      appName: 'Gadgets',
       home: 'Home',
       backHome: 'Back home',
       languageToggle: 'Switch language',
