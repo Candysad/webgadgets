@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { HomeButton } from '../../../components/HomeButton';
+import { useI18n } from '../../../i18n';
 import {
   GAME_COLORS,
   GAME_FONT_SIZES,
@@ -24,6 +25,14 @@ interface TileItem {
 
 // 将毫秒计时统一格式化为秒，保留两位小数，供计时器和完成结果复用。
 const formatElapsedSeconds = (elapsedMs: number) => `${(elapsedMs / 1000).toFixed(2)} s`;
+
+// 用简单占位符替换完成动态文案拼接，避免在组件 JSX 中散落重复字符串模板。
+const replaceTextParams = (template: string, params: Record<string, string | number>) => {
+  return Object.entries(params).reduce(
+    (text, [key, value]) => text.replaceAll(`{${key}}`, String(value)),
+    template,
+  );
+};
 
 // 计算最近若干次完成耗时的平均值；没有成绩时返回 null，方便界面展示占位文案。
 const calculateAverageElapsedMs = (results: number[]) => {
@@ -65,6 +74,7 @@ const clampGridSize = (nextGridSize: number) => {
 
 // 渲染顺序点击数字方格小游戏，并管理 x 调整、随机填数、点击反馈和计时流程。
 export function NumberSequenceGrid() {
+  const { t } = useI18n();
   const [gridSize, setGridSize] = useState(3);
   const [tiles, setTiles] = useState<TileItem[]>([]);
   const [nextExpectedValue, setNextExpectedValue] = useState(1);
@@ -80,6 +90,13 @@ export function NumberSequenceGrid() {
     () => calculateAverageElapsedMs(recentResultsMs),
     [recentResultsMs],
   );
+  const projectText = t.projects.numberSequenceGrid;
+  const averageText =
+    averageElapsedMs === null
+      ? projectText.recentAverageEmpty
+      : replaceTextParams(projectText.recentAverage, {
+          time: formatElapsedSeconds(averageElapsedMs),
+        });
 
   const boardStyle = useMemo(
     (): GameStyleProperties => ({
@@ -269,22 +286,28 @@ export function NumberSequenceGrid() {
   return (
     <main className={styles.page}>
       <HomeButton />
-      <section className={styles.shell} aria-label="顺序点击数字游戏">
+      <section className={styles.shell} aria-label={projectText.ariaGame}>
         <div className={styles.playArea}>
           <div className={styles.resultPanel} style={resultStyle}>
             <p className={styles.result}>
-              {bestResultMs === null ? ' ' : `完成用时：${formatElapsedSeconds(bestResultMs)}`}
+              {bestResultMs === null
+                ? ' '
+                : replaceTextParams(projectText.completedTime, {
+                    time: formatElapsedSeconds(bestResultMs),
+                  })}
             </p>
-            <p className={styles.averageResult}>
-              {averageElapsedMs === null
-                ? '最近 10 次平均：暂无'
-                : `最近 10 次平均：${formatElapsedSeconds(averageElapsedMs)}`}
-            </p>
+            <p className={styles.averageResult}>{averageText}</p>
           </div>
 
-          <div className={styles.board} style={boardStyle} aria-label={`${gridSize} 乘 ${gridSize} 数字方框`}>
+          <div
+            className={styles.board}
+            style={boardStyle}
+            aria-label={replaceTextParams(projectText.boardLabel, { size: gridSize })}
+          >
             {tiles.length === 0 ? (
-              <div className={styles.emptyBoard}>点击开始后生成 {gridSize} x {gridSize} 数字方格</div>
+              <div className={styles.emptyBoard}>
+                {replaceTextParams(projectText.emptyBoard, { size: gridSize })}
+              </div>
             ) : (
               tiles.map((tile) => (
                 <button
@@ -303,12 +326,12 @@ export function NumberSequenceGrid() {
           </div>
         </div>
 
-        <aside className={styles.controls} style={controlStyle} aria-label="游戏控制区">
+        <aside className={styles.controls} style={controlStyle} aria-label={projectText.controlArea}>
           <div className={styles.controlGroup}>
-            <span className={styles.controlLabel}>方格边长 x</span>
+            <span className={styles.controlLabel}>{projectText.gridSizeLabel}</span>
             <div className={styles.sizePicker}>
               <button
-                aria-label="减小 x"
+                aria-label={projectText.decreaseSize}
                 className={styles.iconButton}
                 disabled={isPlaying || gridSize === GRID_SIZE_LIMITS.min}
                 onClick={() => updateGridSize(-1)}
@@ -318,7 +341,7 @@ export function NumberSequenceGrid() {
               </button>
               <strong className={styles.gridValue}>{gridSize}</strong>
               <button
-                aria-label="增大 x"
+                aria-label={projectText.increaseSize}
                 className={styles.iconButton}
                 disabled={isPlaying || gridSize === GRID_SIZE_LIMITS.max}
                 onClick={() => updateGridSize(1)}
@@ -335,7 +358,7 @@ export function NumberSequenceGrid() {
             onClick={startGame}
             type="button"
           >
-            开始
+            {projectText.start}
           </button>
 
           <button
@@ -344,18 +367,14 @@ export function NumberSequenceGrid() {
             onClick={stopGame}
             type="button"
           >
-            放弃
+            {projectText.giveUp}
           </button>
 
           <div className={styles.timer} aria-live="polite">
-            <span>计时器</span>
+            <span>{projectText.timer}</span>
             <span>{formatElapsedSeconds(elapsedMs)}</span>
           </div>
-          <p className={styles.timerAverage} aria-live="polite">
-            {averageElapsedMs === null
-              ? '最近 10 次平均：暂无'
-              : `最近 10 次平均：${formatElapsedSeconds(averageElapsedMs)}`}
-          </p>
+          <p className={styles.timerAverage} aria-live="polite">{averageText}</p>
         </aside>
       </section>
     </main>

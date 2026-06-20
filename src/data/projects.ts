@@ -1,7 +1,6 @@
 export interface ProjectItem {
   id: string;
-  title: string;
-  description: string;
+  translationKey: 'numberSequenceGrid';
   path: string;
   category: 'game' | 'tool';
   status: 'draft' | 'ready';
@@ -10,8 +9,7 @@ export interface ProjectItem {
 export const projects: ProjectItem[] = [
   {
     id: 'number-sequence-grid',
-    title: '舒尔特表（Schulte Grid）',
-    description: '在随机数字方格中按 1 到 n 的顺序快速点击，完成后查看用时。',
+    translationKey: 'numberSequenceGrid',
     path: '/projects/number-sequence-grid',
     category: 'game',
     status: 'ready',
