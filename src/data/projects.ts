@@ -8,9 +8,9 @@ export interface ProjectItem {
 
 export const projects: ProjectItem[] = [
   {
-    id: 'number-sequence-grid',
+    id: 'Schulte-Grid',
     translationKey: 'numberSequenceGrid',
-    path: '/projects/number-sequence-grid',
+    path: '/Schulte-Grid',
     category: 'game',
     status: 'ready',
   },
