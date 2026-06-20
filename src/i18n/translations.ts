@@ -8,14 +8,14 @@ export const LANGUAGE_LABELS: Record<Language, string> = {
 export const translations = {
   zh: {
     common: {
-      appName: 'Web Gadgets',
+      appName: 'Gadgets',
       home: '主页',
       backHome: '返回主页',
       languageToggle: '切换语言',
     },
     home: {
-      title: '静态网页小项目合集',
-      summary: '把好玩的小游戏、顺手的小工具收在一个统一主题的网站里。',
+      title: 'AI 小项目合集',
+      summary: '用 AI 快速实现的小想法。',
       projectList: '项目列表',
       category: {
         game: '小游戏',
@@ -75,7 +75,7 @@ export const translations = {
       eatTonight: {
         title: '今晚吃什么',
         description: '是啊吃什么。让天意为你抉择',
-        ariaGame: '今晚吃什么随机选择工具',
+        ariaGame: '今晚吃什么',
         kicker: 'Dinner Picker',
         inputLabel: '输入候选晚餐',
         inputPlaceholder: '输入一个候选项，按回车添加',
@@ -177,12 +177,12 @@ export const translations = {
       eatTonight: {
         title: 'What to Eat Tonight',
         description: 'May his will choose for you.',
-        ariaGame: 'What to eat tonight random picker',
+        ariaGame: 'What to eat tonight',
         kicker: 'Dinner Picker',
         inputLabel: 'Enter a dinner candidate',
         inputPlaceholder: 'Type one option, press Enter to add',
-        pickButton: 'Pick dinner',
-        listLabel: 'Dinner candidate list',
+        pickButton: 'Choose One',
+        listLabel: 'Candidate list',
         listTitle: 'Candidates',
         countLabel: '{count} items',
         removeLabel: 'Remove {item}',
