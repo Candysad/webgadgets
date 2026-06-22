@@ -70,6 +70,7 @@ export const translations = {
         idlePrompt: ['点击画面后开始等待', '变色后点击画面'],
         waitingPrompt: '等待画面变色',
         readyPrompt: '点击画面',
+        tooEarlyPrompt: ['请勿提前点击', '点击画面后重新开始等待'],
         result: '{time} ms',
       },
       eatTonight: {
@@ -172,6 +173,7 @@ export const translations = {
         idlePrompt: ['Click to start', 'click again when color changes'],
         waitingPrompt: 'Wait for the color changes',
         readyPrompt: 'Click the screen',
+        tooEarlyPrompt: ['Do not click early', 'Click to start waiting again'],
         result: '{time} ms',
       },
       eatTonight: {

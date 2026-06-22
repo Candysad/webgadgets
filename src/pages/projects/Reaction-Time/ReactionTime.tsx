@@ -4,7 +4,7 @@ import { HomeButton } from '../../../components/HomeButton';
 import { useI18n } from '../../../i18n';
 import styles from './ReactionTime.module.css';
 
-type ReactionStatus = 'idle' | 'waiting' | 'ready' | 'result';
+type ReactionStatus = 'idle' | 'waiting' | 'ready' | 'result' | 'tooEarly';
 
 const MIN_WAIT_SECONDS = 3;
 const MAX_WAIT_SECONDS = 5;
@@ -20,7 +20,7 @@ const getPageClassName = (status: ReactionStatus) => {
     return `${styles.page} ${styles.waiting}`;
   }
 
-  if (status === 'ready') {
+  if (status === 'ready' || status === 'tooEarly') {
     return `${styles.page} ${styles.ready}`;
   }
 
@@ -68,10 +68,16 @@ export function ReactionTime() {
     }, waitSeconds * 1000);
   }, [clearWaitTimer]);
 
-  // 处理整屏点击：空闲/结果态开始新一轮，红色点击态计算反应时间。
+  // 处理整屏点击：空闲/结果/提前点击态开始新一轮，等待态提前点击会终止本轮。
   const handleScreenClick = useCallback(() => {
-    if (status === 'idle' || status === 'result') {
+    if (status === 'idle' || status === 'result' || status === 'tooEarly') {
       startRound();
+      return;
+    }
+
+    if (status === 'waiting') {
+      clearWaitTimer();
+      setStatus('tooEarly');
       return;
     }
 
@@ -83,7 +89,7 @@ export function ReactionTime() {
     readyAtRef.current = null;
     setReactionMs(nextReactionMs);
     setStatus('result');
-  }, [startRound, status]);
+  }, [clearWaitTimer, startRound, status]);
 
   // 忽略页面内导航控件点击，避免返回主页时同时触发测试状态变化。
   const handlePageClick = useCallback(
@@ -121,7 +127,9 @@ export function ReactionTime() {
               ? projectText.waitingPrompt
               : status === 'ready'
                 ? projectText.readyPrompt
-                : renderPromptLines(projectText.idlePrompt)}
+                : status === 'tooEarly'
+                  ? renderPromptLines(projectText.tooEarlyPrompt)
+                  : renderPromptLines(projectText.idlePrompt)}
           </p>
         )}
       </section>
