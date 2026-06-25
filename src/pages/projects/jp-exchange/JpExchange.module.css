@@ -1,0 +1,445 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 96px 24px 48px;
+}
+
+.panel {
+  width: min(920px, 100%);
+  text-align: center;
+}
+
+.kicker {
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panel h1 {
+  margin: 0 0 var(--space-6);
+  color: var(--color-text);
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1;
+}
+
+.chartPanel {
+  position: relative;
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgb(15 23 42 / 72%);
+  box-shadow: var(--shadow-sm);
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 220px;
+}
+
+.chartAxis {
+  stroke: rgb(148 163 184 / 28%);
+  stroke-width: 2;
+}
+
+.chartGrid {
+  stroke: rgb(148 163 184 / 16%);
+  stroke-width: 2;
+}
+
+.chartTick {
+  fill: var(--color-muted);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-anchor: end;
+}
+
+.chartLine {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.chartHoverLine {
+  stroke: rgb(248 250 252 / 42%);
+  stroke-dasharray: 8 8;
+  stroke-width: 2;
+}
+
+.chartPoint {
+  opacity: 0.02;
+  stroke: var(--color-surface);
+  stroke-width: 3;
+}
+
+.chartPoint:hover,
+.chartPoint:focus-visible {
+  opacity: 1;
+}
+
+.chartActivePoint {
+  opacity: 1;
+  pointer-events: none;
+  stroke: var(--color-surface);
+  stroke-width: 3;
+}
+
+.pinnedLabel {
+  fill: #f8fafc;
+  paint-order: stroke;
+  stroke: rgb(5 8 22 / 70%);
+  stroke-width: 6;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.chartTooltip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  min-width: 180px;
+  gap: 6px;
+  padding: var(--space-3);
+  border: 1px solid rgb(148 163 184 / 35%);
+  border-radius: var(--radius-md);
+  background: rgb(15 23 42 / 94%);
+  box-shadow: var(--shadow-md);
+  color: var(--color-text);
+  pointer-events: none;
+  text-align: left;
+  transform: translate(12px, -50%);
+}
+
+.chartTooltip strong {
+  color: var(--color-text);
+  font-size: 0.8125rem;
+}
+
+.chartTooltip span {
+  display: grid;
+  grid-template-columns: minmax(72px, 1fr) auto auto;
+  gap: var(--space-2);
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.chartTooltip b {
+  color: var(--color-primary-hover);
+  font-size: 0.75rem;
+}
+
+.chartTooltip em {
+  color: var(--color-text);
+  font-size: 0.75rem;
+  font-style: normal;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.legendColor {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.chartNote {
+  margin: var(--space-3) 0 0;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+}
+
+.switchWrap {
+  position: relative;
+  display: grid;
+  width: min(320px, 100%);
+  min-height: 48px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 auto var(--space-4);
+  padding: 4px;
+  border: 1px solid rgb(134 239 172 / 38%);
+  border-radius: 999px;
+  background: var(--color-success-bg);
+  box-shadow: 0 16px 48px rgb(5 46 22 / 34%);
+}
+
+.switchButton {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-success-text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.switchButton[aria-pressed='true'] {
+  color: #04210e;
+}
+
+.switchThumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 999px;
+  background: #86efac;
+  transition: transform 180ms ease;
+}
+
+.switchThumb[data-position='USD'] {
+  transform: translateX(100%);
+}
+
+.baseLine {
+  margin: 0 0 var(--space-6);
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  display: grid;
+  min-height: 220px;
+  align-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(180deg, rgb(56 189 248 / 8%), transparent 52%),
+    var(--color-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.comparisonCard {
+  align-content: stretch;
+  gap: var(--space-3);
+  text-align: left;
+}
+
+.emptyComparison {
+  align-self: center;
+  color: var(--color-muted);
+  font-weight: 700;
+  text-align: center;
+}
+
+.rateRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(112px, auto) 48px;
+  align-items: center;
+  column-gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.rateRow:last-child {
+  border-bottom: 0;
+}
+
+.rateRow span:first-child {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.rateRow strong {
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 4vw, 2.25rem);
+  line-height: 1;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.rateRow span:last-child {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.currencyName {
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.card strong {
+  color: var(--color-text);
+  font-size: clamp(2.5rem, 8vw, 4.75rem);
+  line-height: 1;
+}
+
+.comparisonCard .rateRow strong {
+  font-size: clamp(1.25rem, 4vw, 2.25rem);
+  text-align: right;
+}
+
+.currencySymbol {
+  color: inherit;
+  margin-right: 0.1em;
+  font-size: 0.76em;
+  vertical-align: 0.14em;
+}
+
+.rateRow strong .currencySymbol {
+  color: inherit;
+  font-size: 0.86em;
+  vertical-align: 0.08em;
+}
+
+.currencyCode {
+  color: var(--color-primary);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.quotePicker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-5);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgb(15 23 42 / 68%);
+}
+
+.quoteOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+  font-size: 0.8125rem;
+  font-weight: 800;
+}
+
+.quoteOption:has(input:checked) {
+  border-color: rgb(134 239 172 / 52%);
+  color: var(--color-success-text);
+  background: var(--color-success-bg);
+}
+
+.quoteOptionPinned {
+  cursor: not-allowed;
+}
+
+.quoteOption input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  accent-color: #22c55e;
+}
+
+.status {
+  min-height: 24px;
+  margin: var(--space-5) 0 0;
+  color: var(--color-muted);
+}
+
+.humorSection {
+  margin-top: var(--space-8);
+}
+
+.humorButton {
+  min-height: 44px;
+  padding: 0 var(--space-6);
+  border: 1px solid rgb(134 239 172 / 52%);
+  border-radius: var(--radius-md);
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.humorButton:hover,
+.humorButton:focus-visible {
+  background: rgb(20 83 45 / 78%);
+}
+
+.videoList {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+.videoCard {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.videoFrame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 88px 16px 40px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .rateRow {
+    grid-template-columns: 1fr auto;
+  }
+
+  .rateRow strong {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    text-align: left;
+  }
+
+  .card {
+    min-height: 180px;
+  }
+}

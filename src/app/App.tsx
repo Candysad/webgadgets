@@ -6,6 +6,7 @@ import { NotFound } from '../pages/NotFound/NotFound';
 import { ColorDifference } from '../pages/projects/Color-Difference';
 import { EatTonight } from '../pages/projects/Eat-Tonight';
 import { MagicConch } from '../pages/projects/Magic-Conch';
+import { JpExchange } from '../pages/projects/jp-exchange';
 import { ReactionTime } from '../pages/projects/Reaction-Time';
 import { NumberSequenceGrid } from '../pages/projects/Schulte-Grid';
 
@@ -21,6 +22,7 @@ export function App() {
           <Route path="/Reaction-Time" element={<ReactionTime />} />
           <Route path="/Eat-Tonight" element={<EatTonight />} />
           <Route path="/Magic-Conch" element={<MagicConch />} />
+          <Route path="/jp-exchange" element={<JpExchange />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
