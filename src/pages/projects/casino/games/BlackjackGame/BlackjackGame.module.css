@@ -1,0 +1,326 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: center;
+  padding-bottom: var(--space-8);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+  align-self: flex-start;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+/* ---- 下注区 ---- */
+
+.bettingBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.bettingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.bettingLabel {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.bettingInputWrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-raised);
+}
+
+.bettingPrefix {
+  padding: 0 0 0 var(--space-3);
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.bettingInput {
+  width: 120px;
+  min-height: 42px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bettingInput:focus {
+  outline: none;
+}
+
+.bettingInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.profit {
+  color: rgb(248 113 113);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  min-width: 60px;
+}
+
+.fractionRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.fractionBtn {
+  min-height: 42px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.fractionBtn:hover,
+.fractionBtn:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.noFundsHint {
+  margin: var(--space-2) 0 0;
+  color: var(--color-warning-text);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---- 牌桌 ---- */
+
+.table {
+  width: min(760px, 100%);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #1a3a2a;
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgb(34 197 94 / 12%) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgb(34 197 94 / 8%) 0%, transparent 50%);
+  box-shadow: var(--shadow-sm);
+}
+
+.handSection {
+  min-height: 200px;
+  padding: var(--space-4) 0;
+}
+
+.handLabel {
+  margin-bottom: var(--space-4);
+  color: rgb(134 239 172);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.score {
+  margin-left: var(--space-2);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.bjBadge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  background: rgb(22 163 74);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+  vertical-align: middle;
+}
+
+/* ---- 卡牌行 ---- */
+
+.cardRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.cardImg {
+  width: 80px;
+  height: 112px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 28%);
+  transition: transform 0.15s;
+}
+
+/* ---- 分隔线 ---- */
+
+.divider {
+  height: 1px;
+  margin: 0 var(--space-6);
+  background: rgb(255 255 255 / 18%);
+}
+
+/* ---- 控制区 ---- */
+
+.controls {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.buttonColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.startButton,
+.hitButton,
+.standButton {
+  min-height: 46px;
+  padding: 0 var(--space-6);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.startButton {
+  background: var(--color-primary);
+  color: #03111a;
+}
+
+.startButton:hover,
+.startButton:focus-visible {
+  background: var(--color-primary-hover);
+}
+
+.hitButton {
+  background: rgb(22 163 74);
+  color: #fff;
+}
+
+.hitButton:hover:not(:disabled),
+.hitButton:focus-visible:not(:disabled) {
+  background: rgb(34 197 94);
+}
+
+.standButton {
+  background: rgb(185 28 28);
+  color: #fecaca;
+}
+
+.standButton:hover:not(:disabled),
+.standButton:focus-visible:not(:disabled) {
+  background: rgb(220 38 38);
+}
+
+.hitButton:disabled,
+.standButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ---- 结果栏 ---- */
+
+.resultBar {
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 1.25rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+/* ---- 查看规则 / 窍门 ---- */
+
+.ruleTipRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.rulesButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.rulesButton:hover,
+.rulesButton:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.rulesPanel {
+  width: min(560px, 100%);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.rulesPanel h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.rulesPanel ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.8;
+}

@@ -9,6 +9,7 @@ import { MagicConch } from '../pages/projects/Magic-Conch';
 import { JpExchange } from '../pages/projects/jp-exchange';
 import { ReactionTime } from '../pages/projects/Reaction-Time';
 import { NumberSequenceGrid } from '../pages/projects/Schulte-Grid';
+import { Casino } from '../pages/projects/casino';
 
 export function App() {
   return (
@@ -23,6 +24,7 @@ export function App() {
           <Route path="/Eat-Tonight" element={<EatTonight />} />
           <Route path="/Magic-Conch" element={<MagicConch />} />
           <Route path="/jp-exchange" element={<JpExchange />} />
+          <Route path="/Casino/*" element={<Casino />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>

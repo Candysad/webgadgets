@@ -1,6 +1,6 @@
 export interface ProjectItem {
   id: string;
-  translationKey: 'numberSequenceGrid' | 'colorDifference' | 'reactionTime' | 'eatTonight' | 'magicConch' | 'jpExchange';
+  translationKey: 'numberSequenceGrid' | 'colorDifference' | 'reactionTime' | 'eatTonight' | 'magicConch' | 'jpExchange' | 'casino';
   path: string;
   category: 'game' | 'tool';
   status: 'draft' | 'ready';
@@ -47,6 +47,13 @@ export const projects: ProjectItem[] = [
     translationKey: 'jpExchange',
     path: '/jp-exchange',
     category: 'tool',
+    status: 'ready',
+  },
+  {
+    id: 'Casino',
+    translationKey: 'casino',
+    path: '/Casino',
+    category: 'game',
     status: 'ready',
   },
 ];

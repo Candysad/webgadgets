@@ -1,0 +1,439 @@
+.layout {
+  min-height: 100vh;
+}
+
+/* ---- 左下角浮动钱包方框（默认隐藏，显示在切换按钮上方） ---- */
+
+.walletBox {
+  position: fixed;
+  bottom: calc(var(--space-4) + 42px + var(--space-3));
+  left: var(--space-4);
+  z-index: 15;
+  width: 220px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.walletBoxVisible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.walletTitle {
+  margin: 0 0 var(--space-4);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.walletRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9375rem;
+}
+
+.walletRow:last-child {
+  border-bottom: none;
+}
+
+.walletLabel {
+  color: var(--color-muted);
+}
+
+.walletValue {
+  color: var(--color-text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- 右侧主区域 ---- */
+
+.main {
+  padding: 72px var(--space-8) var(--space-8);
+  width: 100%;
+}
+
+.header {
+  max-width: 720px;
+  margin-bottom: var(--space-8);
+}
+
+.kicker {
+  margin: 0 0 var(--space-3);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  line-height: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+  max-width: 100%;
+}
+
+.card {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-surface-hover);
+}
+
+.card h2 {
+  margin: var(--space-6) 0 var(--space-2);
+  color: var(--color-text);
+  font-size: 1.25rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  color: var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* ---- 左下角钱包切换按钮 ---- */
+
+.walletToggle {
+  position: fixed;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  z-index: 20;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.walletToggle:hover,
+.walletToggle:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-surface-hover);
+  color: var(--color-primary-hover);
+}
+
+/* ---- 页面内容遮罩（离开确认时模糊） ---- */
+
+.surface {
+  min-height: 100vh;
+  transition: filter 0.18s ease, transform 0.18s ease;
+}
+
+.blurred {
+  filter: blur(7px);
+  pointer-events: none;
+  transform: scale(0.992);
+}
+
+/* ---- 右下角按钮组 ---- */
+
+.bottomActions {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 20;
+  display: flex;
+  gap: var(--space-3);
+}
+
+.leaveButton,
+.bankButton {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.leaveButton:hover,
+.leaveButton:focus-visible {
+  border-color: rgb(248 113 113 / 42%);
+  background: rgb(127 29 29 / 32%);
+  color: #fecaca;
+}
+
+.leaveButtonDanger {
+  border-color: rgb(248 113 113 / 42%);
+  background: rgb(127 29 29 / 32%);
+  color: #fecaca;
+}
+
+.bankButton:hover,
+.bankButton:focus-visible {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+}
+
+/* ---- 离开确认弹窗 ---- */
+
+.overlay {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: rgb(2 6 23 / 48%);
+  backdrop-filter: blur(7px);
+}
+
+.confirmCard {
+  width: min(400px, 100%);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.confirmCard h2 {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text);
+  font-size: 1.25rem;
+}
+
+.confirmCard p {
+  margin: 0 0 var(--space-6);
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.confirmActions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.confirmCancel {
+  min-height: 42px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.confirmCancel:hover,
+.confirmCancel:focus-visible {
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.confirmOk {
+  min-height: 42px;
+  padding: 0 var(--space-5);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: rgb(185 28 28);
+  color: #fecaca;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.confirmOk:hover,
+.confirmOk:focus-visible {
+  background: rgb(220 38 38);
+}
+
+.confirmOk:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* ---- 银行借款弹窗 ---- */
+
+.bankCard {
+  width: min(440px, 100%);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-raised);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.bankCard h2 {
+  margin: 0 0 var(--space-5);
+  color: var(--color-text);
+  font-size: 1.25rem;
+}
+
+.loanBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.loanBarLabel {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  margin-right: var(--space-1);
+}
+
+.loanInputWrap {
+  width: 160px;
+}
+
+.loanInput {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding: 0 var(--space-3);
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  transition: border-color 0.15s;
+  -moz-appearance: textfield;
+}
+
+.loanInput::-webkit-outer-spin-button,
+.loanInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.loanInput:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.loanInputDanger {
+  border-color: rgb(248 113 113);
+}
+
+.stepButton {
+  display: inline-grid;
+  width: 40px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.stepButton:hover:not(:disabled),
+.stepButton:focus-visible:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.stepButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+.interestHint {
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+}
+
+.riskWarning {
+  margin: 0 0 var(--space-4);
+  color: rgb(248 113 113);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* ---- 响应式 ---- */
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .walletBox {
+    position: static;
+  }
+
+  .main {
+    padding: var(--space-4);
+  }
+}
