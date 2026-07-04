@@ -368,7 +368,7 @@ export const translations = {
       },
       blackjack: {
         title: 'Blackjack',
-        description: 'Classic Blackjack — 21 points to wins',
+        description: 'Classic Blackjack — 21 points to win',
         dealer: 'Dealer',
         user: 'Player',
         bet: 'Bet',
