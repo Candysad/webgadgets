@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, BookOpen, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { BlackjackGame as BlackjackGameEngine, GameState, type Card, type GameStatus } from 'blackjack';
+import { BaccaratGame as BaccaratGameEngine, GameState, type BaccaratStatus, type Card } from 'baccarat';
 import { useI18n } from '../../../../../i18n';
 import { useWallet } from '../../WalletContext';
-import styles from './BlackjackGame.module.css';
+import { OddsTable } from '../../../../../components/OddsTable';
+import styles from './BaccaratGame.module.css';
 
 const CARD_BASE = `${import.meta.env.BASE_URL}assets/cards/`;
 
@@ -12,14 +13,14 @@ function getCardSrc(card: Card): string {
   return `${CARD_BASE}${card.rank}${card.suit}.svg`;
 }
 
-export function BlackjackGame() {
+export function BaccaratGame() {
   const { t } = useI18n();
   const { wallet, hideWallet, deduct, add } = useWallet();
 
-  const gameRef = useRef(new BlackjackGameEngine());
+  const gameRef = useRef(new BaccaratGameEngine());
   const settledRef = useRef(false);
 
-  const [status, setStatus] = useState<GameStatus>(() => gameRef.current.getStatus());
+  const [status, setStatus] = useState<BaccaratStatus>(() => gameRef.current.getStatus());
   const [showRules, setShowRules] = useState(false);
   const [showTips, setShowTips] = useState(false);
   const [betText, setBetText] = useState(String(gameRef.current.minBet));
@@ -29,15 +30,18 @@ export function BlackjackGame() {
     hideWallet();
   }, [hideWallet]);
 
-  // ── 结算 ──
+  // ── 派生状态 ──
 
-  const { state, userCards, dealerCards, userScore, dealerScore, winner, userIsBlackjack } = status;
+  const { state, playerCards, bankerCards, playerScore, bankerScore, winner } = status;
 
-  const isPlaying = state === GameState.DEALING_TO_USER;
+  const isWaiting = state === GameState.WAITING_FOR_DEAL;
   const isFinished = gameRef.current.isRoundFinished(status);
   const isInitial = state === GameState.NOT_STARTED;
   const isBetting = isInitial || isFinished;
   const notEnoughFunds = wallet.balance < gameRef.current.minBet;
+  const canDeal = isWaiting;
+
+  // ── 结算 ──
 
   useEffect(() => {
     if (!isFinished || settledRef.current) return;
@@ -50,7 +54,7 @@ export function BlackjackGame() {
     }
   }, [isFinished, add]);
 
-  // ── 事件处理（普通函数，每次渲染都重新创建）──
+  // ── 事件处理 ──
 
   const syncBet = (text: string) => {
     const min = gameRef.current.minBet;
@@ -88,13 +92,8 @@ export function BlackjackGame() {
     setStatus(gameRef.current.getStatus());
   };
 
-  const handleHit = () => {
-    gameRef.current.hit();
-    setStatus(gameRef.current.getStatus());
-  };
-
-  const handleStand = () => {
-    gameRef.current.stand();
+  const handleDeal = () => {
+    gameRef.current.deal();
     setStatus(gameRef.current.getStatus());
   };
 
@@ -109,60 +108,70 @@ export function BlackjackGame() {
 
       {/* 牌桌 */}
       <div className={styles.table}>
+        {/* 庄家 */}
         <div className={styles.handSection}>
           <div className={styles.handLabel}>
-            {t.casino.blackjack.dealer}
-            <span className={styles.score}>({dealerCards.length > 0 ? dealerScore : '-'})</span>
-            {status.dealerIsBlackjack ? <span className={styles.bjBadge}>BJ</span> : null}
+            {t.casino.baccarat.banker}
+            <span className={styles.score}>({bankerCards.length > 0 ? bankerScore : '-'})</span>
           </div>
           <div className={styles.cardRow}>
-            {dealerCards.map((card, i) => (
-              <img key={i} className={styles.cardImg} src={getCardSrc(card)} alt={`${card.rank}${card.suit}`} />
-            ))}
+            {bankerCards.length > 0
+              ? bankerCards.map((card, i) => (
+                  <img key={i} className={styles.cardImg} src={getCardSrc(card)} alt={`${card.rank}${card.suit}`} />
+                ))
+              : [0, 1].map((i) => <div key={i} className={styles.cardPlaceholder} />)}
           </div>
         </div>
 
         <div className={styles.divider} />
 
+        {/* 闲家 */}
         <div className={styles.handSection}>
           <div className={styles.handLabel}>
-            {t.casino.blackjack.user}
-            <span className={styles.score}>({userCards.length > 0 ? userScore : '-'})</span>
-            {userIsBlackjack ? <span className={styles.bjBadge}>BJ</span> : null}
+            {t.casino.baccarat.player}
+            <span className={styles.score}>({playerCards.length > 0 ? playerScore : '-'})</span>
           </div>
           <div className={styles.cardRow}>
-            {userCards.map((card, i) => (
-              <img key={i} className={styles.cardImg} src={getCardSrc(card)} alt={`${card.rank}${card.suit}`} />
-            ))}
+            {playerCards.length > 0
+              ? playerCards.map((card, i) => (
+                  <img key={i} className={styles.cardImg} src={getCardSrc(card)} alt={`${card.rank}${card.suit}`} />
+                ))
+              : [0, 1].map((i) => <div key={i} className={styles.cardPlaceholder} />)}
           </div>
         </div>
       </div>
 
+      {/* 控制区 */}
       <div className={styles.controls}>
         {isBetting && (
           <div className={styles.buttonColumn}>
-            <button className={styles.startButton} disabled={notEnoughFunds} onClick={handleStart} type="button">
-              {isFinished ? t.casino.blackjack.playAgain : t.casino.blackjack.start}
+            <button
+              className={styles.startButton}
+              disabled={notEnoughFunds}
+              onClick={handleStart}
+              type="button"
+            >
+              {isFinished ? t.casino.baccarat.playAgain : t.casino.baccarat.start}
             </button>
-            {notEnoughFunds && <p className={styles.noFundsHint}>{t.casino.blackjack.noFunds}</p>}
+            {notEnoughFunds && <p className={styles.noFundsHint}>{t.casino.baccarat.noFunds}</p>}
           </div>
         )}
-        {isPlaying && (
-          <>
-            <button className={styles.hitButton} onClick={handleHit} type="button">{t.casino.blackjack.hit}</button>
-            <button className={styles.standButton} onClick={handleStand} type="button">{t.casino.blackjack.stand}</button>
-          </>
+        {canDeal && (
+          <button className={styles.dealButton} onClick={handleDeal} type="button">
+            {t.casino.baccarat.deal}
+          </button>
         )}
       </div>
 
+      {/* 结算提示 */}
       {isFinished && winner && (
         <div className={styles.resultBar}>{resultLabel(t, winner)}</div>
       )}
 
-      {/* 下注区 —— 始终显示，游戏中不可编辑 */}
+      {/* 下注区 */}
       <div className={styles.bettingBar}>
         <div className={styles.bettingRow}>
-          <label className={styles.bettingLabel}>{t.casino.blackjack.bet}</label>
+          <label className={styles.bettingLabel}>{t.casino.baccarat.bet}</label>
           <div className={styles.bettingInputWrap}>
             <span className={styles.bettingPrefix}>$</span>
             <input
@@ -186,31 +195,37 @@ export function BlackjackGame() {
         )}
       </div>
 
+      {/* 规则 & 窍门 */}
       <div className={styles.ruleTipRow}>
         <button className={styles.rulesButton} onClick={() => setShowRules((v) => !v)} type="button">
           <BookOpen aria-hidden="true" size={16} />
-          <span>{t.casino.blackjack.rulesButton}</span>
+          <span>{t.casino.baccarat.rulesButton}</span>
         </button>
         <button className={styles.rulesButton} onClick={() => setShowTips((v) => !v)} type="button">
           <Lightbulb aria-hidden="true" size={16} />
-          <span>{t.casino.blackjack.tipsButton}</span>
+          <span>{t.casino.baccarat.tipsButton}</span>
         </button>
       </div>
 
       {showRules && (
         <div className={styles.rulesPanel}>
-          <h3>{t.casino.blackjack.rulesTitle}</h3>
+          <h3>{t.casino.baccarat.rulesTitle}</h3>
           <ul>
-            {t.casino.blackjack.rules.map((line, i) => (<li key={i}>{line}</li>))}
+            {t.casino.baccarat.rules.map((line, i) => (<li key={i}>{line}</li>))}
           </ul>
         </div>
       )}
 
       {showTips && (
         <div className={styles.rulesPanel}>
-          <h3>{t.casino.blackjack.tipsTitle}</h3>
+          <h3>{t.casino.baccarat.tipsTitle}</h3>
+          <OddsTable
+            rows={t.casino.baccarat.tipsOdds}
+            headerLabel={t.casino.baccarat.tipsTableHeaderLabel}
+            headerValue={t.casino.baccarat.tipsTableHeaderValue}
+          />
           <ul>
-            {t.casino.blackjack.tips.map((line, i) => (<li key={i}>{line}</li>))}
+            {t.casino.baccarat.tips.map((line, i) => (<li key={i}>{line}</li>))}
           </ul>
         </div>
       )}
@@ -218,8 +233,11 @@ export function BlackjackGame() {
   );
 }
 
-function resultLabel(t: ReturnType<typeof useI18n>['t'], winner: 'user' | 'dealer' | 'push') {
-  if (winner === 'user') return t.casino.blackjack.userWins;
-  if (winner === 'dealer') return t.casino.blackjack.dealerWins;
-  return t.casino.blackjack.push;
+function resultLabel(
+  t: ReturnType<typeof useI18n>['t'],
+  winner: 'player' | 'banker' | 'tie',
+) {
+  if (winner === 'player') return t.casino.baccarat.win;
+  if (winner === 'banker') return t.casino.baccarat.lose;
+  return t.casino.baccarat.tiePush;
 }

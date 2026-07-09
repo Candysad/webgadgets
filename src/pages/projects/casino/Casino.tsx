@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Building2, DoorOpen, Eye, EyeOff, Minus, Plus } from 'lucide-react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useI18n } from '../../../i18n';
+import { BaccaratGame } from './games/BaccaratGame/BaccaratGame';
 import { BlackjackGame } from './games/BlackjackGame/BlackjackGame';
 import { PlaceholderGame } from './games/PlaceholderGame';
 import { useWallet, WalletProvider } from './WalletContext';
@@ -11,7 +12,7 @@ import styles from './Casino.module.css';
 interface CasinoGame {
   id: string;
   path: string;
-  translationKey: 'placeholderGame' | 'blackjack';
+  translationKey: 'placeholderGame' | 'blackjack' | 'baccarat';
 }
 
 const casinoGames: CasinoGame[] = [
@@ -19,6 +20,11 @@ const casinoGames: CasinoGame[] = [
     id: 'blackjack',
     path: 'blackjack',
     translationKey: 'blackjack',
+  },
+  {
+    id: 'baccarat',
+    path: 'baccarat',
+    translationKey: 'baccarat',
   },
   {
     id: 'placeholder',
@@ -260,6 +266,7 @@ function CasinoLayout({ walletVisible, setWalletVisible }: { walletVisible: bool
           <Routes>
             <Route index element={<CasinoHome />} />
             <Route path="blackjack" element={<BlackjackGame />} />
+            <Route path="baccarat" element={<BaccaratGame />} />
             <Route path="placeholder" element={<PlaceholderGame />} />
           </Routes>
         </main>
