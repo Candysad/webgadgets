@@ -6,7 +6,9 @@
     },
     "dependencies": {
         "@vitejs/plugin-react": "^6.0.2",
+        "katex": "^0.16.8",
         "lucide-react": "latest",
+        "markdown-it": "^13.0.1",
         "react": "latest",
         "react-dom": "latest",
         "react-router-dom": "latest",
@@ -22,7 +24,9 @@
     "private": true,
     "version": "0.1.0",
     "type": "module",
-    "workspaces": ["packages/*"],
+    "workspaces": [
+        "packages/*"
+    ],
     "volta": {
         "node": "22.16.0",
         "npm": "11.17.0"

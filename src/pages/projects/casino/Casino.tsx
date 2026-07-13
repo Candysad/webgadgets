@@ -4,6 +4,7 @@ import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import { useI18n } from '../../../i18n';
 import { BaccaratGame } from './games/BaccaratGame/BaccaratGame';
 import { BlackjackGame } from './games/BlackjackGame/BlackjackGame';
+import { StreetCrapsGame } from './games/StreetCrapsGame/StreetCrapsGame';
 import { PlaceholderGame } from './games/PlaceholderGame';
 import { useWallet, WalletProvider } from './WalletContext';
 import styles from './Casino.module.css';
@@ -12,7 +13,7 @@ import styles from './Casino.module.css';
 interface CasinoGame {
   id: string;
   path: string;
-  translationKey: 'placeholderGame' | 'blackjack' | 'baccarat';
+  translationKey: 'placeholderGame' | 'blackjack' | 'baccarat' | 'streetcraps';
 }
 
 const casinoGames: CasinoGame[] = [
@@ -25,6 +26,11 @@ const casinoGames: CasinoGame[] = [
     id: 'baccarat',
     path: 'baccarat',
     translationKey: 'baccarat',
+  },
+  {
+    id: 'streetcraps',
+    path: 'streetcraps',
+    translationKey: 'streetcraps',
   },
   {
     id: 'placeholder',
@@ -267,6 +273,7 @@ function CasinoLayout({ walletVisible, setWalletVisible }: { walletVisible: bool
             <Route index element={<CasinoHome />} />
             <Route path="blackjack" element={<BlackjackGame />} />
             <Route path="baccarat" element={<BaccaratGame />} />
+            <Route path="streetcraps" element={<StreetCrapsGame />} />
             <Route path="placeholder" element={<PlaceholderGame />} />
           </Routes>
         </main>
